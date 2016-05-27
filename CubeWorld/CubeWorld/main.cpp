@@ -1,9 +1,13 @@
 #include <iostream>
+#include "Test/Test.h"
 
 using namespace std;
+
+
 int main() {
-	cout << "Hello World" << endl;
-	int i;
-	cin >> i;
-	return 0;
+
+    Test t;
+
+    t.startTest();
+    return 0;
 }

@@ -3,14 +3,12 @@
 
 #include "Serializer.h"
 
-using namespace CubeWorld::Serialization;
+using namespace CubeWorld;
 
 namespace CubeWorld {
-	namespace Serialization {
-		class ISerializable {
-		public:
-			virtual void Serialize(Serializer serializer) = 0;
-		};
-	}
+    class ISerializable {
+    public:
+        virtual void Serialize(Serializer serializer) = 0;
+    };
 }
 #endif // !__ISERIALIZABLE_H__

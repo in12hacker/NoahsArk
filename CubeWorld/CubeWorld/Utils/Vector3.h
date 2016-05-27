@@ -2,14 +2,13 @@
 #define __VECTOR3_H__
 
 namespace CubeWorld {
-	namespace Utils {
 
-		class Vector3 {
-		public:
-			float x;
-			float y;
-			float z;
-		};
-		
+    class Vector3 {
+    public:
+        float x;
+        float y;
+        float z;
+    };
+
 }
 #endif // !__VECTOR3_H__

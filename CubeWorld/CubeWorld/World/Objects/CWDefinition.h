@@ -2,36 +2,34 @@
 #define __CWDEFINITION_H__
 
 #include <string>
+#include "../../Serialization/Serializer.h"
 
 using namespace std;
-using namespace CubeWorld::Serialization;
+using namespace CubeWorld;
 
 namespace CubeWorld {
-	namespace World {
-		namespace Objects {
 
-			enum DefinitionType{
-				Tile,
-				Item,
-				ItemTile,
-				Avatar
-			};
+    enum DefinitionType {
+        Tile,
+        Item,
+        ItemTile,
+        Avatar
+    };
 
-			class CWDefinition {
-			public:
-				DefinitionType type;
-				string id;
-				string description;
-				
-				int energy;
+    class CWDefinition{
+    public:
+        DefinitionType type;
+        string id;
+        string description;
 
-				CWDefinition();
+        int energy;
 
-				CWDefinition(DefinitionType type);
+        CWDefinition();
 
-				virtual void Serialize(Serializer serializer);
-			};
-		}
-	}
+        CWDefinition(DefinitionType type);
+
+        virtual void Serialize(Serializer serializer);
+
+    };
 }
 #endif // !__CWDEFINITION_H__
