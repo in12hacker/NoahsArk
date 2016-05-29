@@ -2,31 +2,66 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/CubeWorld.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/CubeWorld.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWComponent.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/LightModeAmbient.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/DayTimeLuminanceInfo.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/DayTimeLuminanceInfo.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/LightModeAmbient.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/LightModeLightSource.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/LightModeLightSource.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/DayCycleManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/DayCycleManager.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Lights/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/WorldStatus.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWObject.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWObject.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWDefinition.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWDefinition.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWObject.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWVisualDefinition.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWVisualDefinition.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWComponent.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CWComponent.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Objects/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/ICWFxListener.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/World.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/World.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/WorldStatus.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/ICWListener.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Generator/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Generator/PlainWorldGenerator.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/World/Generator/PlainWorldGenerator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/RegisterSerializationTypes.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/ISerializable.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/Serializer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/Serializer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/RegisterSerializationTypes.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Test/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Test/Test.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Test/TestNamespace.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Test/TestNamespace.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Test/Test.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Graphics.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Serialization.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Color.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Manhattan.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Serialization.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Vector3.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Color.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Graphics.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Vector3.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/Serializer.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/ISerializable.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Serialization/Serializer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/Manhattan.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Utils/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/ArtifactDefinition.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/Artifact.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/ArtifactDefinition.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/ArtifactManager.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/IArtifactGraphics.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/ArtifactManager.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/IArtifactGraphics.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CubeWorld/Artifacts/Artifact.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CubeWorld/main.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />

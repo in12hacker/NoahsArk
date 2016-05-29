@@ -1,0 +1,14 @@
+//
+// Created by Peter Chen on 5/29/16.
+//
+
+#ifndef CUBEWORLD_ITEMCOMPONENTGOTOPLAYER_H
+#define CUBEWORLD_ITEMCOMPONENTGOTOPLAYER_H
+
+
+class ItemComponentGoToPlayer {
+
+};
+
+
+#endif //CUBEWORLD_ITEMCOMPONENTGOTOPLAYER_H

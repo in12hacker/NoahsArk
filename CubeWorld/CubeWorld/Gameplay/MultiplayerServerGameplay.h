@@ -1,0 +1,14 @@
+//
+// Created by Peter Chen on 5/29/16.
+//
+
+#ifndef CUBEWORLD_MULTIPLAYERSERVERGAMEPLAY_H
+#define CUBEWORLD_MULTIPLAYERSERVERGAMEPLAY_H
+
+
+class MultiplayerServerGameplay {
+
+};
+
+
+#endif //CUBEWORLD_MULTIPLAYERSERVERGAMEPLAY_H

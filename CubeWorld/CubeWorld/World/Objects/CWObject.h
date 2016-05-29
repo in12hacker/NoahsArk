@@ -2,7 +2,7 @@
 #define __CWOBJECT_H__
 
 #include "../../Utils/Vector3.h"
-#include "../CubeWorld.h"
+#include "../World.h"
 #include "CWDefinition.h"
 
 using namespace CubeWorld;

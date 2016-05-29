@@ -2,7 +2,7 @@
 // Created by Peter Chen on 5/29/16.
 //
 
-#include "CubeWorld.h"
+#include "World.h"
 
 using namespace CubeWorld;
 

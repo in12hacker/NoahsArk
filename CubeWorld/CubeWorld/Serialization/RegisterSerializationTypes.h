@@ -1,0 +1,14 @@
+//
+// Created by Peter Chen on 5/29/16.
+//
+
+#ifndef CUBEWORLD_REGISTERSERIALIZATIONTYPES_H
+#define CUBEWORLD_REGISTERSERIALIZATIONTYPES_H
+
+
+class RegisterSerializationTypes {
+
+};
+
+
+#endif //CUBEWORLD_REGISTERSERIALIZATIONTYPES_H
