@@ -3,8 +3,11 @@
 
 
 namespace CubeWorld {
-    class CubeWorld {
+    class World {
+    public:
+        World();
 
+        ~World();
     };
 
 }

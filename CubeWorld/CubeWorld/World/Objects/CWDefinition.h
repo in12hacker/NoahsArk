@@ -16,7 +16,7 @@ namespace CubeWorld {
         Avatar
     };
 
-    class CWDefinition{
+    class CWDefinition {
     public:
         DefinitionType type;
         string id;
@@ -31,5 +31,7 @@ namespace CubeWorld {
         virtual void Serialize(Serializer serializer);
 
     };
+
+
 }
 #endif // !__CWDEFINITION_H__

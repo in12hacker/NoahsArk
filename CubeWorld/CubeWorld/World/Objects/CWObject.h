@@ -13,11 +13,13 @@ namespace CubeWorld {
     class CWObject {
     public:
         int objectId;
-        CubeWorld world;
-        CWDefinition CWDefinition;
+        World world;
+        CWDefinition cwDefinition;
         Vector3 position;
 
         CWObject();
+
+        ~CWObject();
     };
 
 }

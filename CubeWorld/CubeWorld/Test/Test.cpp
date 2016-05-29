@@ -4,9 +4,13 @@
 
 #include <iostream>
 #include "Test.h"
+#include "TestNamespace.h"
 
 using namespace std;
 
 void Test::startTest() {
-    cout << "Hello Test and Cmake!" << endl;
+
+//    CWComponent cwcomponent;
+
+    TestNp::TestNamespace t;
 }
