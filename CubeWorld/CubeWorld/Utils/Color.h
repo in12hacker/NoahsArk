@@ -8,6 +8,22 @@
 
 namespace CubeWorld {
     class Color {
+    public:
+        Color();
+
+        ~Color();
+
+        Color(float r, float g, float b, float a);
+
+        bool Equals(Color color);
+
+        int GetHashCode();
+
+        Color operator*(float v);
+
+        bool operator!=(Color right);
+
+        bool operator==(Color right);
 
     };
 
