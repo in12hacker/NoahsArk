@@ -13,11 +13,11 @@ namespace CubeWorld {
 
         ~Color();
 
-        Color(float r, float g, float b, float a);
+        Color(float _r, float _g, float _b, float _a);
 
         bool Equals(Color color);
 
-        int GetHashCode();
+//        int GetHashCode();
 
         Color operator*(float v);
 
@@ -25,6 +25,8 @@ namespace CubeWorld {
 
         bool operator==(Color right);
 
+	public:
+		float r, g, b, a;
     };
 
 }
