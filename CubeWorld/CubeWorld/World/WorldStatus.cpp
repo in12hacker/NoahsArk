@@ -15,7 +15,8 @@ WorldStatus::~WorldStatus() {
 }
 
 string WorldStatus::ToString() {
-//    return "ER:" + executedRules + ", IT: " + invalidatedTiels + ", UT:" + updatedTiles + ", CC:" + checkedConditions;
+    //return "ER:" + executedRules + ", IT: " + invalidatedTiels + ", UT:" + updatedTiles + ", CC:" + checkedConditions;
+	return string("haha");
 }
 
 
