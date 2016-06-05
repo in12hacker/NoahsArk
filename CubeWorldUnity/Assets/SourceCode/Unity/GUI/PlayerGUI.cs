@@ -72,13 +72,13 @@ public class PlayerGUI : MonoBehaviour
 
     public void EnterInventory()
     {
-        playerUnity.gameManagerUnity.ReleaseCursor();
+        playerUnity.gameManagerUnity.ShowMenu();
         ActiveState = State.INVENTORY;
     }
 
     public void ExitInventory()
     {
-        playerUnity.gameManagerUnity.LockCursor();
+        playerUnity.gameManagerUnity.HideMenu();
         ActiveState = State.NORMAL;
     }
 

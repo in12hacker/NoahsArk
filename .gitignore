@@ -1,3 +1,5 @@
 **/Debug/
 **/Library/
 **/Temp/
+**/*.apk
+**/Mac.app

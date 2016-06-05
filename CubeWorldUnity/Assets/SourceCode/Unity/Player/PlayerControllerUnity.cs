@@ -10,8 +10,8 @@ public class PlayerControllerUnity : MonoBehaviour
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
 
-    public float sensitivityX = 15.0f;
-    public float sensitivityY = 15.0f;
+    public float sensitivityX = 0.05f;
+    public float sensitivityY = -0.05f;
 
     public float minimumX = -360.0f;
     public float maximumX = 360.0f;
@@ -44,6 +44,10 @@ public class PlayerControllerUnity : MonoBehaviour
     private Vector3 scaleHand_Current;
     private Quaternion rotationHand_Current;
 
+	private Vector2 mPreviousDelta;
+	private Vector2 mPreviousTouchPosition;
+	private bool mDragging;
+
     private bool firstUpdate = true;
 
     public void Start()
@@ -66,36 +70,29 @@ public class PlayerControllerUnity : MonoBehaviour
         if (playerUnity.gameManagerUnity.State == GameManagerUnity.GameManagerUnityState.GAME &&
             playerUnity.playerGUI.ActiveState == PlayerGUI.State.NORMAL)
         {
-            if (Cursor.lockState == CursorLockMode.None)
+            if (firstUpdate)
             {
-                //Auto pause if the user leaves the game for some reason (ALT + TAB, etc..)
-                    playerUnity.gameManagerUnity.Pause();
+                rotationYaxis = playerUnity.player.rotation.y;
+                rotationXaxis = playerUnity.player.rotation.x;
+                firstUpdate = false;
             }
-            else
-            {
-                if (firstUpdate)
-                {
-                    rotationYaxis = playerUnity.player.rotation.y;
-                    rotationXaxis = playerUnity.player.rotation.x;
-                    firstUpdate = false;
-                }
 
-                if (Input.GetKeyDown(KeyCode.R))
-                    playerUnity.player.ResetPosition();
+			//TODO reset position and change camera menu
+            if (Input.GetKeyDown(KeyCode.R))
+                playerUnity.player.ResetPosition();
 
-                if (Input.GetKeyDown(KeyCode.C))
-                    playerUnity.ChangeCamera();
+            if (Input.GetKeyDown(KeyCode.C))
+                playerUnity.ChangeCamera();
 
-                UpdateJump();
-                UpdateMovement();
-                UpdateCameraRotation();
-                UpdateUserActions();
-                UpdateItemOnHand();
+            UpdateJump();
+            UpdateMovement();
+            UpdateCameraRotation();
+            UpdateUserActions();
+//            UpdateItemOnHand();
 
-                playerUnity.player.rotation.y = rotationYaxis;
-                playerUnity.player.rotation.x = rotationXaxis;
-            }
-        }
+            playerUnity.player.rotation.y = rotationYaxis;
+            playerUnity.player.rotation.x = rotationXaxis;
+		}
     }
 
 	private void ExecuteHandUseAnimation()
@@ -122,7 +119,7 @@ public class PlayerControllerUnity : MonoBehaviour
 			if (currentObjectInHand != null)
 			{
 				goInHand = playerUnity.gameManagerUnity.objectsManagerUnity.CreateGameObjectFromObject(currentObjectInHand);
-				
+					
 				goInHand.transform.parent = hand.transform;
 				goInHand.transform.localScale = new Vector3(1, 1, 1);
 				goInHand.transform.localPosition = new Vector3(0, 0, 0);
@@ -218,7 +215,7 @@ public class PlayerControllerUnity : MonoBehaviour
 			
             if (userActionCooldown <= 0.0f)
             {
-                if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+                if (Input.touchCount > 0)
                 {
                     ExecuteHandUseAnimation();
 
@@ -227,7 +224,7 @@ public class PlayerControllerUnity : MonoBehaviour
 
                 if (raycastResult.hit)
                 {
-                    if (Input.GetMouseButton(0))
+                    if (Input.touchCount == 3)
                     {
                         if (raycastResult.position.x > 0 && raycastResult.position.x < playerUnity.player.world.tileManager.sizeX - 1 &&
                             raycastResult.position.z > 0 && raycastResult.position.z < playerUnity.player.world.tileManager.sizeZ - 1 &&
@@ -262,7 +259,7 @@ public class PlayerControllerUnity : MonoBehaviour
                             }
                         }
                     }
-                    else if (Input.GetMouseButton(1))
+                    else if (Input.touchCount == 2)
                     {
                         if (playerUnity.objectInHand != null && playerUnity.objectInHand.definition.type == CWDefinition.DefinitionType.Tile)
                         {
@@ -312,39 +309,53 @@ public class PlayerControllerUnity : MonoBehaviour
 
     private void UpdateCameraRotation()
     {
-        if (Cursor.lockState == CursorLockMode.Locked)
+		Vector2 pointerDelta = new Vector2(0,0);
+		if (Input.touchCount > 0) {
+
+			if (Input.GetTouch (0).phase == TouchPhase.Began) {
+				mDragging = true;
+			}
+
+			if (Input.GetTouch (0).phase == TouchPhase.Ended) {
+				mDragging = false;
+			}
+
+			if (mDragging) {
+				pointerDelta = new Vector2 (Input.touches [0].position.x - mPreviousDelta.x, Input.touches [0].position.y - mPreviousDelta.y).normalized;
+				mPreviousDelta = Input.touches [0].position;
+			}
+		}
+
+        if (axes == RotationAxes.MouseXAndY)
         {
-            if (axes == RotationAxes.MouseXAndY)
-            {
-                // Read the mouse input axis
-                rotationYaxis += Input.GetAxis("Mouse X") * sensitivityX;
-                rotationXaxis += Input.GetAxis("Mouse Y") * sensitivityY;
+            // Read the mouse input axis
+			rotationYaxis += pointerDelta.x * sensitivityX;
+			rotationXaxis += pointerDelta.y * sensitivityY;
 
-                rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
-                rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
+            rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
+            rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
 
-                Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
-                Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
+            Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
+            Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
 
-                playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
-                transform.localRotation = originalPlayerRotation * xQuaternion;
-            }
-            else if (axes == RotationAxes.MouseX)
-            {
-                rotationYaxis += Input.GetAxis("Mouse X") * sensitivityX;
-                rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
+            playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
+            transform.localRotation = originalPlayerRotation * xQuaternion;
+        }
+        else if (axes == RotationAxes.MouseX)
+        {
+			rotationYaxis += pointerDelta.x * sensitivityX;
+			rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
 
-                Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
-                transform.localRotation = originalPlayerRotation * xQuaternion;
-            }
-            else
-            {
-                rotationXaxis += Input.GetAxis("Mouse Y") * sensitivityY;
-                rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
+            Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
+            transform.localRotation = originalPlayerRotation * xQuaternion;
+        }
+        else
+        {
+			rotationXaxis += pointerDelta.y * sensitivityY;
+			rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
 
-                Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
-                playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
-            }
+            Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
+            playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
         }
     }
 
@@ -356,5 +367,6 @@ public class PlayerControllerUnity : MonoBehaviour
             angle -= 360F;
         return Mathf.Clamp(angle, min, max);
     }
+
 
 }

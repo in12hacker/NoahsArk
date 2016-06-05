@@ -39,6 +39,11 @@ public class GameManagerUnity : MonoBehaviour
     public CWObjectsManagerUnity objectsManagerUnity;
     public CWFxManagerUnity fxManagerUnity;
 
+	private float virtualWidth = 800f;
+	private float virtualHeight = 480f;
+	private float WidthRatio;
+	private float HeightRatio;
+
     public GameManagerUnityState State
     {
         get { return newState; }
@@ -62,6 +67,13 @@ public class GameManagerUnity : MonoBehaviour
         fxManagerUnity = new CWFxManagerUnity(this);
 
         worldManagerUnity = new WorldManagerUnity(this);
+
+		Screen.autorotateToLandscapeLeft = true;
+		Screen.autorotateToLandscapeRight = true;
+		Screen.autorotateToPortrait = false;
+		Screen.autorotateToPortraitUpsideDown = false;
+		WidthRatio = Screen.width / virtualWidth;
+		HeightRatio = Screen.height / virtualWidth;
     }
 
     public void DestroyWorld()
@@ -83,12 +95,18 @@ public class GameManagerUnity : MonoBehaviour
         System.GC.Collect(System.GC.MaxGeneration, System.GCCollectionMode.Forced);
     }
 
+	public float getWidthRatio(){
+		return WidthRatio;
+	}
+
+	public float getHeightRatio(){
+		return HeightRatio;
+	}
+
     static private string GetConfigText(string resourceName)
     {
         string configText = ((TextAsset)Resources.Load(resourceName)).text;
-
-#if !UNITY_WEBPLAYER
-
+		
         if (Application.isEditor == false && Application.isWebPlayer == false)
         {
             try
@@ -104,8 +122,6 @@ public class GameManagerUnity : MonoBehaviour
                 Debug.Log(ex.ToString());
             }
         }
-
-#endif
 
         return configText;
     }
@@ -125,7 +141,6 @@ public class GameManagerUnity : MonoBehaviour
 
     public void LoadCustomTextures()
     {
-#if !UNITY_WEBPLAYER
 
         if (Application.isEditor == false && Application.isWebPlayer == false)
         {
@@ -152,10 +167,8 @@ public class GameManagerUnity : MonoBehaviour
             }
         }
 
-#endif
     }
 
-#if !UNITY_WEBPLAYER
 
     private bool registerInWebServer = false;
     private WWW registerWebServerRequest;
@@ -177,14 +190,12 @@ public class GameManagerUnity : MonoBehaviour
             timerUpdate = 30;
         }
     }
-
-#endif
-
+	
     public void StartGame()
     {
         GetComponent<Camera>().enabled = false;
 
-        LockCursor();
+        HideMenu();
 
         State = GameManagerUnityState.GAME;
         Debug.Log("Start Game Now!");
@@ -192,14 +203,14 @@ public class GameManagerUnity : MonoBehaviour
 
     public void Pause()
     {
-        ReleaseCursor();
+        ShowMenu();
 
         State = GameManagerUnityState.PAUSE;
     }
 
     public void Unpause()
     {
-        LockCursor();
+        HideMenu();
 
         State = GameManagerUnityState.GAME;
     }
@@ -215,10 +226,8 @@ public class GameManagerUnity : MonoBehaviour
 
     public void Update()
     {
-#if !UNITY_WEBPLAYER
         if (registerInWebServer)
             RegisterInWebServer();
-#endif
 
         switch (state)
         {
@@ -300,23 +309,21 @@ public class GameManagerUnity : MonoBehaviour
         if (internalErrorLog != null)
         {
             GUI.TextArea(new Rect(0, 0, Screen.width, Screen.height / 4), internalErrorLog);
-            if (GUI.Button(new Rect(0, Screen.height / 4, 100, 20), "Clear Log"))
+            if (GUI.Button(new Rect(0, Screen.height / 4, 100 * WidthRatio, 20 * HeightRatio), "Clear Log"))
             {
                 internalErrorLog = null;
             }
         }
+
     }
 
-    public void ReleaseCursor()
+
+    public void ShowMenu()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
-    public void LockCursor()
+    public void HideMenu()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public void PreferencesUpdated()

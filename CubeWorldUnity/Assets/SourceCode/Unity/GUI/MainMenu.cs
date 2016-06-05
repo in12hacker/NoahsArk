@@ -18,10 +18,8 @@ public class MainMenu
         GENERATOR,
         OPTIONS,
         JOIN_MULTIPLAYER,
-#if !UNITY_WEBPLAYER
         LOAD,
         SAVE,
-#endif
         ABOUT
     }
 
@@ -53,7 +51,6 @@ public class MainMenu
                 DrawJoinMultiplayer();
                 break;
 
-#if !UNITY_WEBPLAYER
             case MainMenuState.LOAD:
                 DrawMenuLoadSave(true);
                 break;
@@ -61,7 +58,6 @@ public class MainMenu
             case MainMenuState.SAVE:
                 DrawMenuLoadSave(false);
                 break;
-#endif
         }
     }
 
@@ -79,7 +75,6 @@ public class MainMenu
                 DrawOptions();
                 break;
 
-#if !UNITY_WEBPLAYER
             case MainMenuState.LOAD:
                 DrawMenuLoadSave(true);
                 break;
@@ -87,11 +82,9 @@ public class MainMenu
             case MainMenuState.SAVE:
                 DrawMenuLoadSave(false);
                 break;
-#endif
         }
     }
 
-#if !UNITY_WEBPLAYER
     void DrawMenuLoadSave(bool load)
     {
         if (load)
@@ -148,7 +141,6 @@ public class MainMenu
 
         MenuSystem.EndMenu();
     }
-#endif
 
     private CubeWorld.Configuration.Config lastConfig; 
 
@@ -165,13 +157,11 @@ public class MainMenu
             );
         }
 
-#if !UNITY_WEBPLAYER
         MenuSystem.Button("Save World", delegate()
         {
             state = MainMenuState.SAVE;
         }
         );
-#endif
 
         MenuSystem.Button("Options", delegate()
         {
@@ -204,13 +194,11 @@ public class MainMenu
         }
         );
 
-#if !UNITY_WEBPLAYER
         MenuSystem.Button("Load Saved World", delegate()
         {
             state = MainMenuState.LOAD;
         }
         );
-#endif
 
         MenuSystem.Button("Join Multiplayer", delegate()
         {
@@ -367,9 +355,7 @@ public class MainMenu
     private int currentGeneratorOffset = 0;
     private int currentDayInfoOffset = 0;
     private int currentGameplayOffset = 0;
-#if !UNITY_WEBPLAYER
     private bool multiplayer = false;
-#endif
 
     void DrawGenerator()
     {
@@ -411,13 +397,11 @@ public class MainMenu
             );
         }
 
-#if !UNITY_WEBPLAYER
         MenuSystem.Button("Host Multiplayer: " + (multiplayer ? "Yes" : "No") , delegate()
         {
             multiplayer = !multiplayer;
         }
         );
-#endif
 
         MenuSystem.LastButton("Generate!", delegate()
         {
@@ -431,7 +415,6 @@ public class MainMenu
             lastConfig.extraMaterials = availableConfigurations.extraMaterials;
             lastConfig.gameplay = GameplayFactory.AvailableGameplays[currentGameplayOffset];
 
-#if !UNITY_WEBPLAYER
             if (multiplayer)
             {
                 MultiplayerServerGameplay multiplayerServerGameplay = new MultiplayerServerGameplay(lastConfig.gameplay.gameplay, true);
@@ -442,7 +425,6 @@ public class MainMenu
 
                 gameManagerUnity.RegisterInWebServer();
             }
-#endif
 
             gameManagerUnity.worldManagerUnity.CreateRandomWorld(lastConfig);
 

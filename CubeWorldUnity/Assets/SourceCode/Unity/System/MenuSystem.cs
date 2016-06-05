@@ -1,117 +1,126 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿	using UnityEngine;
+	using System.Collections;
+	using System.Collections.Generic;
 
-public class MenuSystem
-{
-    static public GUISkin skin;
+	public class MenuSystem
+	{
+	static public GUISkin skin;
 
-    public delegate void OnPressedDelegate();
+	public delegate void OnPressedDelegate();
 
-    static private int cantidadBotones;
+	static private int cantidadBotones;
 
-    static private int focusedButton = 0;
+	static private int focusedButton = 0;
 
-    static private bool ignoreAxis;
-    static private bool ignoreButton;
+	static private bool ignoreAxis;
+	static private bool ignoreButton;
 
-    static private List<OnPressedDelegate> delegates = new List<OnPressedDelegate>();
+	static private List<OnPressedDelegate> delegates = new List<OnPressedDelegate>();
 
-    static public float vAxis = 0.0f;
-    static public bool actionButtonDown = false;
-    static public bool useKeyboard = true;
+	static public float vAxis = 0.0f;
+	static public bool actionButtonDown = false;
+	static public bool useKeyboard = true;
 
-    static public void ResetFocus()
-    {
-        focusedButton = 0;
-    }
+	static float WidthRatio;
+	static float HeightRatio;
+	static float virtualHeight = 480.0f;
+	static float virtualWidth = 800.0f;
 
-    static public void BeginMenu(string text)
-    {
-        cantidadBotones = 0;
-        delegates.Clear();
 
-        //Screen.showCursor = false;
-        GUI.skin = skin;
-        GUI.BeginGroup(new Rect(Screen.width / 2 - 200, Screen.height / 2 - 200, 400, 400));
+	static public void ResetFocus()
+	{
+	    focusedButton = 0;
+	}
 
-        GUI.Box(new Rect(0, 0, 400, 400), text);
-    }
+	static public void BeginMenu(string text)
+	{
+		WidthRatio = Screen.width / virtualWidth;
+		HeightRatio = Screen.height / virtualHeight;
 
-    static public void Button(string text, OnPressedDelegate onPressed)
-    {
-        delegates.Add(onPressed);
+	    cantidadBotones = 0;
+	    delegates.Clear();
 
-        GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
+	    //Screen.showCursor = false;
+	    GUI.skin = skin;
+	    GUI.BeginGroup(new Rect(Screen.width / 2 - 200*WidthRatio, Screen.height / 2 - 200*HeightRatio, 400*WidthRatio, 400*HeightRatio));
 
-        if (GUI.Button(new Rect(10, 40 + 30 * 2 * cantidadBotones, 380, 30), text))
-            onPressed();
+	    GUI.Box(new Rect(0, 0, 400*WidthRatio, 400*HeightRatio), text);
+	}
 
-        cantidadBotones++;
-    }
+	static public void Button(string text, OnPressedDelegate onPressed)
+	{
+	    delegates.Add(onPressed);
 
-    static public string TextField(string text)
-    {
-        GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
+	    GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
 
-        text = GUI.TextField(new Rect(10, 40 + 30 * 2 * cantidadBotones, 380, 30), text);
+	    if (GUI.Button(new Rect(10*WidthRatio, 40*HeightRatio + 30 * 2 * cantidadBotones*HeightRatio, 380*WidthRatio, 30*HeightRatio), text))
+	        onPressed();
 
-        cantidadBotones++;
+	    cantidadBotones++;
+	}
 
-        return text;
-    }
+	static public string TextField(string text)
+	{
+	    GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
 
-    static public void LastButton(string text, OnPressedDelegate onPressed)
-    {
-        delegates.Add(onPressed);
+		text = GUI.TextField(new Rect(10*WidthRatio, 40*HeightRatio + 30 * 2 * cantidadBotones*HeightRatio, 380*WidthRatio, 30*HeightRatio), text);
 
-        GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
+	    cantidadBotones++;
 
-        if (GUI.Button(new Rect(10, 400 - 70, 380, 30), text))
-            onPressed();
+	    return text;
+	}
 
-        cantidadBotones++;
-    }
+	static public void LastButton(string text, OnPressedDelegate onPressed)
+	{
+	    delegates.Add(onPressed);
 
-    static public void EndMenu()
-    {
-        GUI.EndGroup();
+	    GUI.SetNextControlName("Boton" + cantidadBotones.ToString());
 
-        if (useKeyboard)
-        {
-            if (cantidadBotones > 0 && GUIUtility.hotControl == 0)
-            {
-                if (!ignoreAxis && vAxis != 0)
-                {
-                    if (vAxis > 0)
-                        focusedButton--;
-                    else if (vAxis < 0)
-                        focusedButton++;
+		if (GUI.Button(new Rect(10*WidthRatio, 400*HeightRatio - 70*HeightRatio, 380*WidthRatio, 30*HeightRatio), text))
+	        onPressed();
 
-                    ignoreAxis = true;
-                }
+	    cantidadBotones++;
+	}
 
-                if (vAxis == 0)
-                    ignoreAxis = false;
+	static public void EndMenu()
+	{
+	    GUI.EndGroup();
 
-                if (focusedButton < 0)
-                    focusedButton = cantidadBotones - 1;
+	    if (useKeyboard)
+	    {
+	        if (cantidadBotones > 0 && GUIUtility.hotControl == 0)
+	        {
+	            if (!ignoreAxis && vAxis != 0)
+	            {
+	                if (vAxis > 0)
+	                    focusedButton--;
+	                else if (vAxis < 0)
+	                    focusedButton++;
 
-                if (focusedButton >= cantidadBotones)
-                    focusedButton = 0;
+	                ignoreAxis = true;
+	            }
 
-                GUI.FocusControl("Boton" + focusedButton.ToString());
+	            if (vAxis == 0)
+	                ignoreAxis = false;
 
-                if (!ignoreButton && actionButtonDown)
-                {
-                    ignoreButton = true;
-                    delegates[focusedButton]();
-                }
-                else if (!actionButtonDown)
-                {
-                    ignoreButton = false;
-                }
-            }
-        }
-    }
-}
+	            if (focusedButton < 0)
+	                focusedButton = cantidadBotones - 1;
+
+	            if (focusedButton >= cantidadBotones)
+	                focusedButton = 0;
+
+	            GUI.FocusControl("Boton" + focusedButton.ToString());
+
+	            if (!ignoreButton && actionButtonDown)
+	            {
+	                ignoreButton = true;
+	                delegates[focusedButton]();
+	            }
+	            else if (!actionButtonDown)
+	            {
+	                ignoreButton = false;
+	            }
+	        }
+	    }
+	}
+	}
