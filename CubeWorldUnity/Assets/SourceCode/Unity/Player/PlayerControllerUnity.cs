@@ -10,8 +10,8 @@ public class PlayerControllerUnity : MonoBehaviour
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
 
-    public float sensitivityX = 0.05f;
-    public float sensitivityY = -0.05f;
+    public float sensitivityX = 100.0f;
+    public float sensitivityY = -100.0f;
 
     public float minimumX = -360.0f;
     public float maximumX = 360.0f;
@@ -46,6 +46,7 @@ public class PlayerControllerUnity : MonoBehaviour
 
 	private Vector2 mPreviousDelta;
 	private Vector2 mPreviousTouchPosition;
+    private Vector2 touchThreshold = new Vector2(5.0f,5.0f);
 	private bool mDragging;
 
     private bool firstUpdate = true;
@@ -314,14 +315,21 @@ public class PlayerControllerUnity : MonoBehaviour
 
 			if (Input.GetTouch (0).phase == TouchPhase.Began) {
 				mDragging = true;
+                mPreviousDelta = Input.touches[0].position;
 			}
 
 			if (Input.GetTouch (0).phase == TouchPhase.Ended) {
 				mDragging = false;
+                mPreviousDelta = Vector2.zero;
 			}
 
 			if (mDragging) {
-				pointerDelta = new Vector2 (Input.touches [0].position.x - mPreviousDelta.x, Input.touches [0].position.y - mPreviousDelta.y).normalized;
+				pointerDelta = new Vector2 (Input.touches [0].position.x - mPreviousDelta.x, Input.touches [0].position.y - mPreviousDelta.y);
+                if (Mathf.Abs(pointerDelta.x )< touchThreshold.x)
+                    pointerDelta.x = 0;
+                if (Mathf.Abs(pointerDelta.y) < touchThreshold.y)
+                    pointerDelta.y = 0;
+                pointerDelta = pointerDelta.normalized;
 				mPreviousDelta = Input.touches [0].position;
 			}
 		}

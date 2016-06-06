@@ -4,3 +4,4 @@
 **/*.apk
 **/Mac.app
 **/ProjectSettings
+**/.vs
