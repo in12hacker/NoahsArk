@@ -36,6 +36,11 @@ namespace CubeWorld.Tiles
 		public bool liquid;
         public bool burns;
 
+		//peter: each tile is a state machine
+		//useful status such as: open, close;
+		//or even future usage for red stone
+		public int status; 
+
         public TileUpdateRules tileUpdateRules;
         public TileActionRules tileActionRules;
 

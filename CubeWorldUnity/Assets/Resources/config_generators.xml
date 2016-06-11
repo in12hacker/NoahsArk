@@ -2,7 +2,7 @@
 
   <Generators>
     
-    <Generator name="Forest and Mountains and Caves - Perlin" surroundingLevel ="sizeY * 0.53" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Forest and Mountains and Caves - Perlin" surroundingLevel ="sizeY * 0.53" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Lava at the bottom -->
@@ -64,7 +64,7 @@
     </Generator>
 
 
-    <Generator name="Beach" surroundingLevel ="sizeY * 0.5" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Beach" surroundingLevel ="sizeY * 0.5" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <Plain fromY="0" toY="sizeY * 0.25" tileType="lava" />
@@ -83,7 +83,7 @@
 
     </Generator>
 
-    <Generator name="Midpoint Displacement" surroundingLevel ="sizeY * 0.53" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Midpoint Displacement" surroundingLevel ="sizeY * 0.53" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Basic Terrain -->
@@ -120,7 +120,7 @@
 
     </Generator>
 
-    <Generator name="Basic Perlin" surroundingLevel ="sizeY * 0.53" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Basic Perlin" surroundingLevel ="sizeY * 0.53" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Basic Terrain -->
@@ -165,7 +165,7 @@
 
     </Generator>
 
-    <Generator name="Plain Forest" surroundingLevel ="sizeY * 0.5" surroundingMaterial="223" surroundingOffsetY="-0.1" >
+    <Generator name="Plain Forest" surroundingLevel ="sizeY * 0.5" surroundingMaterial="501" surroundingOffsetY="-0.1" >
 
       <Chained>
         <!-- Lava Floor -->
@@ -234,7 +234,7 @@
 
     </Generator>
 
-    <Generator name="Forest and Mountains" surroundingLevel ="sizeY * 0.6" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Forest and Mountains" surroundingLevel ="sizeY * 0.6" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Lava Floor -->
@@ -293,7 +293,7 @@
 
     </Generator>
 
-    <Generator name="Forest and Mountains and Caves" surroundingLevel ="sizeY * 0.6" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Forest and Mountains and Caves" surroundingLevel ="sizeY * 0.6" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Lava Floor -->
@@ -360,7 +360,7 @@
 
     </Generator>
 
-    <Generator name="Forest and Mountains and LOTS of Caves" surroundingLevel ="sizeY * 0.6" surroundingMaterial="223" surroundingOffsetY="-0.1">
+    <Generator name="Forest and Mountains and LOTS of Caves" surroundingLevel ="sizeY * 0.6" surroundingMaterial="501" surroundingOffsetY="-0.1">
 
       <Chained>
         <!-- Lava Floor -->

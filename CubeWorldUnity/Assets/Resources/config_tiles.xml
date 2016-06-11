@@ -2,8 +2,8 @@
   
   <!-- Tiles used for damage / fire -->
   <ExtraMaterials>
-    <DamageMaterials>240,241,242,243,244,245,246,247,248,249</DamageMaterials>
-    <FireMaterials>30</FireMaterials>
+    <DamageMaterials>226,227,228,229,230,231,8,40,72,104</DamageMaterials>
+    <FireMaterials>174</FireMaterials>
   </ExtraMaterials>
 
   <!-- Tile Definitions
@@ -21,35 +21,37 @@
       - solid: Tile is solid (true / false), the default is true
   -->
   <Tiles>
-    <Tile id="dirt" drawMode="SOLID" description="Dirt" materials="2" energy="4" />
-    <Tile id="dirt_grass" drawMode="SOLID" description="Dirt + Grass" materials="3,3,2,0,3,3" energy="6"/>
+    <Tile id="dirt" drawMode="SOLID" description="Dirt" materials="162" energy="4" />
+    <Tile id="dirt_grass" drawMode="SOLID" description="Dirt + Grass" materials="332,332,162,55,332,332" energy="6"/>
 
-    <Tile id="sand" drawMode="SOLID" description="Sand" materials="18" energy="6"/>
+    <Tile id="sand" drawMode="SOLID" description="Sand" materials="243" energy="6"/>
     
-    <Tile id="rock" drawMode="SOLID" description="Rock" materials="1" energy="8" />
-    <Tile id="falling_rock" drawMode="SOLID" description="Falling Rock" materials="1" energy="8" />
+    <Tile id="rock" drawMode="SOLID" description="Rock" materials="163" energy="8" />
+    <Tile id="falling_rock" drawMode="SOLID" description="Falling Rock" materials="163" energy="8" />
 
-    <Tile id="hard_rock" drawMode="SOLID" description="Hard Rock" materials="48" />
-    <Tile id="hard_glass" drawMode="SOLID_ALPHA" description="Hard Glass" materials="49" castShadow="false"/>
-    <Tile id="ceiling_glass" drawMode="SOLID_ALPHA" description="Ceiling Glass" materials="-1,-1,49,-1,-1,-1" castShadow="false"/>
+    <Tile id="hard_rock" drawMode="SOLID" description="Hard Rock" materials="160" />
+    <Tile id="hard_glass" drawMode="SOLID_ALPHA" description="Hard Glass" materials="263" castShadow="false"/>
+    <Tile id="ceiling_glass" drawMode="SOLID_ALPHA" description="Ceiling Glass" materials="-1,-1,263,-1,-1,-1" castShadow="false"/>
     
-    <Tile id="glass" drawMode="SOLID_ALPHA" description="Light" castShadow="false" lightSourceIntensity="14" materials="49" energy="6"/>
-    <Tile id="wood" drawMode="SOLID" description="Wood" materials="20,20,21,21,20,20" energy="6" burns="true"/>
-    <Tile id="leaves" drawMode="SOLID_ALPHA" description="Leaves" materials="52" energy="2" burns="true" />
+    <Tile id="glass" drawMode="SOLID_ALPHA" description="Light" castShadow="false" lightSourceIntensity="14" materials="263" energy="6"/>
+    <Tile id="wood" drawMode="SOLID" description="Wood" materials="451,451,452,452,451,451" energy="6" burns="true"/>
+    <Tile id="leaves" drawMode="SOLID_ALPHA" description="Leaves" materials="455" energy="2" burns="true" />
 
-    <Tile id="water" liquid="true" solid="false" drawMode="LIQUID" animated="true" description="Water" castShadow="false" materials="223" energy="1"/>
-    <Tile id="lava" liquid="true" solid="true" drawMode="LIQUID" animated="true" description="Lava" castShadow="false" lightSourceIntensity="14" materials="255" energy="4"/>
+    <Tile id="water" liquid="true" solid="false" drawMode="LIQUID" animated="true" description="Water" castShadow="false" materials="2" energy="1"/>
+    <Tile id="lava" liquid="true" solid="true" drawMode="LIQUID" animated="true" description="Lava" castShadow="false" lightSourceIntensity="14" materials="0" energy="4"/>
 
-    <Tile id="rock_floor" drawMode="SOLID" description="Rock Floor" materials="16" energy="8" />
-    <Tile id="rock_grass" drawMode="SOLID" description="Rock w/Grass" materials="36" energy="8" />
+    <Tile id="rock_floor" drawMode="SOLID" description="Rock Floor" materials="100" energy="8" />
+    <Tile id="rock_grass" drawMode="SOLID" description="Rock w/Grass" materials="164" energy="8" />
 
-    <Tile id="rock_gold" drawMode="SOLID" description="Rock w/Gold" materials="32" energy="14"/>
-    <Tile id="rock_copper" drawMode="SOLID" description="Rock w/Copper" materials="33" energy="14" />
-    <Tile id="rock_carbon" drawMode="SOLID" description="Rock w/Carbon" materials="34" energy="14" />
-    <Tile id="rock_diamond" drawMode="SOLID" description="Rock w/Diamond" materials="50" energy="14" />
-    <Tile id="rock_red" drawMode="SOLID" description="Rock w/Red" materials="51" energy="14" />
+    <Tile id="rock_gold" drawMode="SOLID" description="Rock w/Gold" materials="331" energy="14"/>
+    <Tile id="rock_copper" drawMode="SOLID" description="Rock w/Copper" materials="395" energy="14" />
+    <Tile id="rock_carbon" drawMode="SOLID" description="Rock w/Carbon" materials="161" energy="14" />
+    <Tile id="rock_diamond" drawMode="SOLID" description="Rock w/Diamond" materials="109" energy="14" />
+    <Tile id="rock_red" drawMode="SOLID" description="Rock w/Red" materials="51" energy="51" />
 
-    <Tile id="tnt" drawMode="SOLID" description="TNT" materials="8,8,10,9,8,8" energy="1"/>
+    <Tile id="tnt" drawMode="SOLID" description="TNT" materials="278,278,246,310,278,278" energy="1"/>
+
+    <Tile id="ladder" drawMode="SOLID_ALPHA" description="Ladder" materials="416" energy="2" burns="true"/>
   </Tiles>
 
   <TileRules>

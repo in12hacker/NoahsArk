@@ -3,7 +3,7 @@ using CubeWorld.Tiles;
 
 public class GraphicsUnity
 {
-    public const int TILE_PER_MATERIAL_ROW = 16;
+    public const int TILE_PER_MATERIAL_ROW = 32;
 
     static public Vector3 TilePositionToVector3(int x, int y, int z)
     {

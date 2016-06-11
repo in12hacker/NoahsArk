@@ -18,15 +18,24 @@ SubShader {
 		   Bind "Color", color
 		} 		
 		
-		//Lighting On
-		SetTexture [_MainTex] {
-			Combine texture * primary DOUBLE, texture * primary 
-		} 
-		
-		// Blend in the alpha texture
-        SetTexture [_DamageTex] {
-            combine previous +- texture
-        }
+//		//Lighting On
+//		SetTexture [_MainTex] {
+//			Combine texture * primary DOUBLE, texture * primary 
+//		} 
+//		
+//		// Blend in the alpha texture
+//        SetTexture [_DamageTex] {
+//            combine previous +- texture
+//        }
+
+		// Apply base texture
+          SetTexture [_MainTex] {
+              combine texture * primary DOUBLE, texture * primary
+          }
+        // Blend in the alpha texture using the lerp operator
+       	  SetTexture [_DamageTex] {
+              combine texture lerp (texture) previous
+          }
 	}
 }
 

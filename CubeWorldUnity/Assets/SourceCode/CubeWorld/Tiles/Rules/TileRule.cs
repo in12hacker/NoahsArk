@@ -26,7 +26,6 @@ namespace CubeWorld.Tiles.Rules
 
         public virtual void Execute(TileManager tileManager, Tile tile, TilePosition pos)
         {
-
         }
 
         public virtual void Serialize(Serializer serializer)

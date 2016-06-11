@@ -12,8 +12,7 @@ public class WorldManagerUnity
     {
         this.gameManagerUnity = gameManagerUnity;
     }
-
-#if !UNITY_WEBPLAYER
+	
 
     static public string GetWorldFilePath(int n)
     {
@@ -101,8 +100,7 @@ public class WorldManagerUnity
 
         worldFileInfoCache.Clear();
     }
-
-#endif
+	
 
     public void JoinMultiplayerGame(string server, int port)
     {
@@ -120,9 +118,6 @@ public class WorldManagerUnity
 
         public MultiplayerGameLoaderGenerator(WorldManagerUnity worldManagerUnity, string server, int port)
         {
-#if UNITY_WEBPLAYER
-            Security.PrefetchSocketPolicy(server, port);
-#endif
             this.worldManagerUnity = worldManagerUnity;
             mutiplayerClientGameplay = new MultiplayerClientGameplay(server, port);
         }

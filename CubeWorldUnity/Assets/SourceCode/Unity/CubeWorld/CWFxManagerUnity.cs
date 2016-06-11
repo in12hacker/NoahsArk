@@ -23,8 +23,9 @@ public class CWFxManagerUnity : ICWFxListener
         effects["explosion"] = Resources.Load("Effects/FxExplosion", typeof(GameObject)) as GameObject;
         sounds["explosion"] = new AudioClip[] { Resources.Load("Effects/SoundExplosion", typeof(AudioClip)) as AudioClip };
         sounds["hitmetal"] = new AudioClip[] { Resources.Load("Effects/SoundHitMetal", typeof(AudioClip)) as AudioClip, Resources.Load("Effects/SoundHitMetal2", typeof(AudioClip)) as AudioClip };
-        sounds["hit"] = new AudioClip[] { Resources.Load("Effects/SoundHit", typeof(AudioClip)) as AudioClip };
-        effectsComponents["vibration"] = typeof(FxVibration);
+//		sounds["hit"] = new AudioClip[] { Resources.Load("Effects/SoundHit", typeof(AudioClip)) as AudioClip };
+		sounds["hit"] = new AudioClip[] { Resources.Load("Effects/cloth1", typeof(AudioClip)) as AudioClip };
+		effectsComponents["vibration"] = typeof(FxVibration);
     }
 
     private AudioClip ChooseRandom(AudioClip[] clips)

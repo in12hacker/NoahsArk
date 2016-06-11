@@ -196,6 +196,7 @@ public class GameManagerUnity : MonoBehaviour
         GetComponent<Camera>().enabled = false;
 
         HideMenu();
+		LockCursor ();
 
         State = GameManagerUnityState.GAME;
         Debug.Log("Start Game Now!");
@@ -204,6 +205,7 @@ public class GameManagerUnity : MonoBehaviour
     public void Pause()
     {
         ShowMenu();
+		ReleaseCursor ();
 
         State = GameManagerUnityState.PAUSE;
     }
@@ -211,6 +213,7 @@ public class GameManagerUnity : MonoBehaviour
     public void Unpause()
     {
         HideMenu();
+		LockCursor ();
 
         State = GameManagerUnityState.GAME;
     }
@@ -268,23 +271,29 @@ public class GameManagerUnity : MonoBehaviour
     }
 
     private float textureAnimationTimer;
-    private int animFrames = 5;
     private int animFrame;
-    private int textureAnimationFPS = 2;
+    private int textureAnimationFPS = 3;
+	private float uvdelta = 1.0f / GraphicsUnity.TILE_PER_MATERIAL_ROW;
 
     private void UpdateAnimatedTexture()
     {
+		//currently we do not have good water texture, so don't animate water flow
         textureAnimationTimer += Time.deltaTime;
 
         if (textureAnimationTimer > 1.0f / textureAnimationFPS)
         {
             textureAnimationTimer = 0.0f;
+			animFrame++;
 
-            animFrame++;
+			if(animFrame <= 1){
+				materialLiquidAnimated.mainTextureOffset = new Vector2(animFrame * uvdelta, 0.0f);
+			}else if(animFrame <= 3){
+				materialLiquidAnimated.mainTextureOffset = new Vector2((animFrame - 2) * uvdelta, uvdelta);
+			}
 
-            float uvdelta = 1.0f / GraphicsUnity.TILE_PER_MATERIAL_ROW;
-
-            materialLiquidAnimated.mainTextureOffset = new Vector2(-(animFrame % animFrames) * uvdelta, 0.0f);
+			if(animFrame > 3){
+				animFrame = -1;
+			}
         }
     }
 
@@ -309,13 +318,25 @@ public class GameManagerUnity : MonoBehaviour
         if (internalErrorLog != null)
         {
             GUI.TextArea(new Rect(0, 0, Screen.width, Screen.height / 4), internalErrorLog);
-            if (GUI.Button(new Rect(0, Screen.height / 4, 100 * WidthRatio, 20 * HeightRatio), "Clear Log"))
+            if (GUI.Button(new Rect(0, Screen.height / 4, 100 * WidthRatio, 50 * HeightRatio), "Clear Log"))
             {
                 internalErrorLog = null;
             }
         }
 
     }
+
+	public void ReleaseCursor()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+	}
+	
+	public void LockCursor()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+	}
 
 
     public void ShowMenu()

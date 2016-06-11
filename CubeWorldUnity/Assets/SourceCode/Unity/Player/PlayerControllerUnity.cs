@@ -89,7 +89,7 @@ public class PlayerControllerUnity : MonoBehaviour
             UpdateMovement();
             UpdateCameraRotation();
             UpdateUserActions();
-//            UpdateItemOnHand();
+            UpdateItemOnHand();
 
             playerUnity.player.rotation.y = rotationYaxis;
             playerUnity.player.rotation.x = rotationXaxis;
@@ -216,7 +216,7 @@ public class PlayerControllerUnity : MonoBehaviour
 			
             if (userActionCooldown <= 0.0f)
             {
-                if (Input.touchCount > 0)
+                if (Input.GetMouseButton(0) || Input.GetMouseButton(1) )
                 {
                     ExecuteHandUseAnimation();
 
@@ -225,7 +225,7 @@ public class PlayerControllerUnity : MonoBehaviour
 
                 if (raycastResult.hit)
                 {
-                    if (Input.touchCount == 3)
+                    if (Input.GetMouseButton(0))
                     {
                         if (raycastResult.position.x > 0 && raycastResult.position.x < playerUnity.player.world.tileManager.sizeX - 1 &&
                             raycastResult.position.z > 0 && raycastResult.position.z < playerUnity.player.world.tileManager.sizeZ - 1 &&
@@ -260,7 +260,7 @@ public class PlayerControllerUnity : MonoBehaviour
                             }
                         }
                     }
-                    else if (Input.touchCount == 2)
+                    else if (Input.GetMouseButton(1))
                     {
                         if (playerUnity.objectInHand != null && playerUnity.objectInHand.definition.type == CWDefinition.DefinitionType.Tile)
                         {
@@ -310,61 +310,41 @@ public class PlayerControllerUnity : MonoBehaviour
 
     private void UpdateCameraRotation()
     {
-		Vector2 pointerDelta = new Vector2(0,0);
-		if (Input.touchCount > 0) {
-
-			if (Input.GetTouch (0).phase == TouchPhase.Began) {
-				mDragging = true;
-                mPreviousDelta = Input.touches[0].position;
+		
+		if (Cursor.lockState == CursorLockMode.Locked)
+		{
+			if (axes == RotationAxes.MouseXAndY)
+			{
+				// Read the mouse input axis
+				rotationYaxis += Input.GetAxis("Mouse X") * sensitivityX;
+				rotationXaxis += Input.GetAxis("Mouse Y") * sensitivityY;
+				
+				rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
+				rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
+				
+				Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
+				Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
+				
+				playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
+				transform.localRotation = originalPlayerRotation * xQuaternion;
 			}
-
-			if (Input.GetTouch (0).phase == TouchPhase.Ended) {
-				mDragging = false;
-                mPreviousDelta = Vector2.zero;
+			else if (axes == RotationAxes.MouseX)
+			{
+				rotationYaxis += Input.GetAxis("Mouse X") * sensitivityX;
+				rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
+				
+				Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
+				transform.localRotation = originalPlayerRotation * xQuaternion;
 			}
-
-			if (mDragging) {
-				pointerDelta = new Vector2 (Input.touches [0].position.x - mPreviousDelta.x, Input.touches [0].position.y - mPreviousDelta.y);
-                if (Mathf.Abs(pointerDelta.x )< touchThreshold.x)
-                    pointerDelta.x = 0;
-                if (Mathf.Abs(pointerDelta.y) < touchThreshold.y)
-                    pointerDelta.y = 0;
-                pointerDelta = pointerDelta.normalized;
-				mPreviousDelta = Input.touches [0].position;
+			else
+			{
+				rotationXaxis += Input.GetAxis("Mouse Y") * sensitivityY;
+				rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
+				
+				Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
+				playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
 			}
 		}
-
-        if (axes == RotationAxes.MouseXAndY)
-        {
-            // Read the mouse input axis
-			rotationYaxis += pointerDelta.x * sensitivityX;
-			rotationXaxis += pointerDelta.y * sensitivityY;
-
-            rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
-            rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
-
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
-
-            playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
-            transform.localRotation = originalPlayerRotation * xQuaternion;
-        }
-        else if (axes == RotationAxes.MouseX)
-        {
-			rotationYaxis += pointerDelta.x * sensitivityX;
-			rotationYaxis = ClampAngle(rotationYaxis, minimumX, maximumX);
-
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotationYaxis, Vector3.up);
-            transform.localRotation = originalPlayerRotation * xQuaternion;
-        }
-        else
-        {
-			rotationXaxis += pointerDelta.y * sensitivityY;
-			rotationXaxis = ClampAngle(rotationXaxis, minimumY, maximumY);
-
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotationXaxis, Vector3.left);
-            playerUnity.mainCamera.transform.localRotation = originalCameraRotation * yQuaternion;
-        }
     }
 
     public static float ClampAngle(float angle, float min, float max)
