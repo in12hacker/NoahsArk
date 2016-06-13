@@ -51,7 +51,7 @@
 
     <Tile id="tnt" drawMode="SOLID" description="TNT" materials="278,278,246,310,278,278" energy="1"/>
 
-    <Tile id="ladder" drawMode="SOLID_ALPHA" description="Ladder" materials="416" energy="2" burns="true"/>
+    <Tile id="ladder" drawMode="SOLID_ALPHA" description="Ladder" materials="602,602,602,602,602,416" energy="2" burns="true"/>
   </Tiles>
 
   <TileRules>
